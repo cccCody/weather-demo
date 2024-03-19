@@ -6,8 +6,6 @@ class OpenStreetMapService
         response = Net::HTTP.get_response(uri)
         locations = JSON.parse(response.body)
         locations.first
-
-        #todo: handle errors
     end
 end
 
