@@ -1,0 +1,12 @@
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold text-body-emphasis">Forecast Demo</h1>
+  <div class="col-lg-6 mx-auto">
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <%= form_tag("/search", id: "address-form", method: "get", data: { type: "json" }) do %>
+        <%= label_tag 'address', "Enter an address or location to check the weather", class: 'lead mb-4' %>
+        <%= text_field_tag :address, nil, placeholder: "742 Evergreen Terrace", value: @address, class: 'form-control' %>
+        <%= button_tag "Search", type: 'submit', class: 'btn btn-primary btn-lg mt-4 gap-3' %>
+      <% end %>
+    </div>
+  </div>
+</div>

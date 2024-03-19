@@ -1,3 +1,48 @@
-<div id="weather-results">
-    it's hot at <%= @address %>
+<%= render "address_form" %>
+
+<div class='mx-5'>
+  <table class="table">
+    <thead>
+      <tr>
+        <% @periods.each do |period| %>
+          <th class='text-center'>
+            <%= period['name'] %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @periods.each do |period| %>
+          <td class='text-center'>
+            <%= period['temperature'] %>&deg; <%= period['temperatureUnit'] %>
+          </td>
+        <% end %>
+      </tr>
+
+      <tr>
+        <% @periods.each do |period| %>
+          <td class='text-center' data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%= period['detailedForecast'] %>">
+          <p><%= period['shortForecast'] %></p>
+          <% probability_of_precipitation = period.dig('probabilityOfPrecipitation', 'value') %>
+          <% if probability_of_precipitation %>
+            &#x1f327; <%= period['probabilityOfPrecipitation']['value'] %>%
+          <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class='m-5 p-5'>
+  <% if @from_cache %>
+    <p>&#x1F7E2 results from cache</p>
+  <% else %>
+    <p>&#x1f534 results not from cache</p>
+  <% end %>
+
+  <p>
+    interpreted address as: <%= @display_name %> (<%= @lat %>, <%= @lon %>)
+  </p>
 </div>
