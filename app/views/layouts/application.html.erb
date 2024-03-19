@@ -11,15 +11,6 @@
   </head>
 
   <body>
-    <div id="main-flexbox">
-      <div>
-        <%= form_tag("/search", id: "address-form", method: "get", data: { type: "json" }) do %>
-          <%= label_tag :address, "Address:" %>
-          <%= text_field_tag :address, nil, placeholder: "742 Evergreen Terrace" %>
-          <%= submit_tag "Search" %>
-        <% end %>
-      </div>
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>
