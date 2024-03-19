@@ -6,6 +6,11 @@ class OpenStreetMapServiceTest < ActionDispatch::IntegrationTest
     assert_equal "20500", location.dig('address', 'postcode')
   end
 
+  test "street address only" do
+    location = OpenStreetMapService.get_coords "1600 Pennsylvania Ave"
+    refute_nil location.dig('address', 'postcode')
+  end
+
   test "zip code only" do
     location = OpenStreetMapService.get_coords "10036"
     assert_equal "10036", location.dig('address', 'postcode')
