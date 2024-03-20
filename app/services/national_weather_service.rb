@@ -10,8 +10,13 @@ class NationalWeatherService
             raise ArgumentError.new "Couldn't find forecast for (#{lat}, #{lon})"
         end
 
-        forecastUri = URI(point['properties']['forecast'])
+        forecastUri = URI(point.dig('properties', 'forecast'))
+        Rails.logger.debug "forecastUri: #{forecastUri}"
         forecastResponse = Net::HTTP.get_response(forecastUri)
-        JSON.parse(forecastResponse.body)
+        result = JSON.parse(forecastResponse.body)
+        if result['status'] == 503
+            raise ArgumentError.new "Error from National Weather Service: #{result['detail']}"
+        end
+        result
     end
 end

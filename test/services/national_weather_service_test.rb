@@ -1,8 +1,8 @@
 require "test_helper"
 
 class NationalWeatherServiceTest < ActionDispatch::IntegrationTest
-  test "finds weather periods for white house address" do
-    forecast = NationalWeatherService.get_forecast "42.6766", "-70.8984"
+  test "finds weather periods for seatac airport" do
+    forecast = NationalWeatherService.get_forecast 47.4435, -122.3016
     periods = forecast.dig('properties', 'periods')
     refute_empty periods
   end

@@ -6,8 +6,8 @@ class ForecastControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'search white house address' do
-    get search_url, params: { address: '1600 Pennsylvania Ave NW, Washington, DC 20500' }
+  test 'search address' do
+    get search_url, params: { address: '151 E Lake Washington Blvd, Seattle, WA 98112' }
     assert_response :success
     assert_select 'table' do
       assert_select 'tr', 3

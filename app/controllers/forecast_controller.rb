@@ -10,7 +10,7 @@ class ForecastController < ApplicationController
 
         begin
             location = OpenStreetMapService.get_coords @address
-            raise ArgumentError.new "invalid address" unless location
+            raise ArgumentError.new "Couldn't find a forecast for that location. Please check the address and try again." unless location
 
             logger.debug "location: #{JSON.pretty_generate(location)}"
 
@@ -36,8 +36,8 @@ class ForecastController < ApplicationController
     
             render 'search'
             return
-        rescue ArgumentError
-            flash[:warning] = "Couldn't find a forecast for that location. Please check the address and try again."
+        rescue ArgumentError => err
+            flash[:warning] = err.message
             redirect_to '/'
         end
 

@@ -7,7 +7,7 @@ class OpenStreetMapServiceTest < ActionDispatch::IntegrationTest
   end
 
   test "street address only" do
-    location = OpenStreetMapService.get_coords "1600 Pennsylvania Ave"
+    location = OpenStreetMapService.get_coords "151 E Lake Washington Blvd"
     refute_nil location.dig('address', 'postcode')
   end
 
