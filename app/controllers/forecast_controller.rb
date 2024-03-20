@@ -27,7 +27,7 @@ class ForecastController < ApplicationController
                 @from_cache = true
             else
                 forecast = NationalWeatherService.get_forecast(@lat, @lon)
-                Rails.cache.write(zip_code, forecast)
+                Rails.cache.write(zip_code, forecast, expires_in: 30.minutes)
                 logger.debug "caching forecast for #{zip_code}"
             end
 
